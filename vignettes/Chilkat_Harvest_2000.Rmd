@@ -20,9 +20,9 @@ library(cwtr)
 ```
 
 
-```{r example1}
+```{r example1, fig.height = 8, fig.width = 8, out.width = "8.5in" }
 #Point Estimates for Troll, SW 28, NW Quadrant
-x <- cwtEst(N=c(33666,NA), n=7618, lambda=c(138,140,116,116), m=1, theta=c(0.018867925,102.145455))
+x <- cwtEst(N=c(33666,NA), n=7618, lambda=c(138,140,116,116), m=1, theta=c(0.01887,102.14546))
 #Use the print method to look at results
 x
 #Use the summary method to obtain SE, CV, and CI
@@ -34,12 +34,12 @@ xBoot
 #Use the summary method again to obtain SE, CV, and CI
 summary(xBoot)
 #Use the plot method to obtain plots of the bootstrap simulation
-plot(xBoot)
+#plot(xBoot)
 ```
 
 
 
-```{r example2}
+```{r example2, fig.height = 8, fig.width = 8, out.width = "8.5in" }
 #Point Estimates for Troll, SW 30, NW Quadrant
 x <- cwtEst(N=c(124896,NA), n=35159, lambda=c(783,798,633,633), m=6, theta=c(0.018867925,102.145455))
 #Use the print method to look at results
@@ -57,7 +57,7 @@ plot(xBoot)
 ```
 
 
-```{r example3}
+```{r example3, fig.height = 8, fig.width = 8, out.width = "8.5in" }
 #Point Estimates for Sport, SW 34, NE Quadrant
 x <- cwtEst(N=c(6056,3210960), n=2008, lambda=c(109,112,97,97), m=2, theta=c(0.018867925,102.145455))
 #Use the print method to look at results
@@ -71,7 +71,7 @@ xBoot
 #Use the summary method again to obtain SE, CV, and CI
 summary(xBoot)
 #Use the plot method to obtain plots of the bootstrap simulation
-plot(xBoot)
+#plot(xBoot)
 
 ```
 
