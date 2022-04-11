@@ -32,7 +32,7 @@ You can install the development version of cwtr from [GitHub](https://github.com
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("justinpriest/cwtr")
+remotes::install_github("justinpriest/cwtr", build_vignettes = TRUE)
 ```
 
 <br>

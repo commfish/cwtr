@@ -22,7 +22,7 @@ You can install the development version of cwtr from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("justinpriest/cwtr")
+remotes::install_github("justinpriest/cwtr", build_vignettes = TRUE)
 ```
 
 <br>
@@ -68,9 +68,9 @@ summary(xBoot)
 #> 
 #> Bootstrap Estimates Summary:
 #>        Mean     Variance SE       CV        Bias      CI_lwr CI_uppr 
-#> r.boot 243.2929 58026.77 240.8875 0.9901131 5.577205  0      694.1261
-#> t.boot 4.6905   5.517662 2.34897  0.5007932 0.2071825 1      9       
-#> m.boot 1.061    1.10759  1.052421 0.9919141 1.053939  0      3       
+#> r.boot 242.4064 58018.03 240.8693 0.9936592 4.690692  0      698.9541
+#> t.boot 4.6845   5.514911 2.348385 0.5013096 0.2011825 1      9       
+#> m.boot 1.0577   1.111082 1.054079 0.9965762 1.050639  0      3       
 #> 
 #> NOTE:
 #> r is the # of fish caught
