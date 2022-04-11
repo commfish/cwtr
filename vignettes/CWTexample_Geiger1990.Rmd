@@ -20,7 +20,7 @@ library(cwtr)
 
 
 
-```{r fig.height = 8, fig.width = 8, out.width = "8.5in" }
+```{r geigerex1, fig.height = 4, fig.width = 6 }
 #Point Estimates for Geiger's first example
 x <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=10, theta=c(0.5,NA))
 #Use the print method to compare results

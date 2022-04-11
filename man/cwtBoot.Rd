@@ -11,7 +11,7 @@ cwtBoot(x, method = "parametric", nreps = 1000)
 
 \item{method}{The method to calculate bootstrapped intervals can be either "parametric" or
 "geiger". Using parametric bootstrapping follows a deterministic approach; using Geiger's
-method follows the Geiger (1990) approach to bootstrapping}
+method follows the Geiger (1990) approach to bootstrapping.}
 
 \item{nreps}{the number of fish sampled in the fishery}
 }
@@ -19,6 +19,7 @@ method follows the Geiger (1990) approach to bootstrapping}
 Create a bootstrap confidence interval
 }
 \examples{
-cwtBoot()
+x <- cwtEst(N=c(125000,NA), n=35000, lambda=c(800,800,600,600), m=6, theta=c(0.019, 102))
+xBoot <- cwtBoot(x, method="parametric", nreps=10000)
 }
 \keyword{cwt}

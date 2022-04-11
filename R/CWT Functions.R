@@ -73,15 +73,15 @@ cwtEst <- function(N, n, lambda, m, theta) {
 #' @param nreps the number of fish sampled in the fishery
 #' @param method The method to calculate bootstrapped intervals can be either "parametric" or
 #' "geiger". Using parametric bootstrapping follows a deterministic approach; using Geiger's
-#' method follows the Geiger (1990) approach to bootstrapping
+#' method follows the Geiger (1990) approach to bootstrapping. 
 
 #' @keywords cwt
 #' @export
 #' @examples
-#' cwtBoot()
+#' x <- cwtEst(N=c(125000,NA), n=35000, lambda=c(800,800,600,600), m=6, theta=c(0.019, 102))
+#' xBoot <- cwtBoot(x, method="parametric", nreps=10000)
 
-cwtBoot <- function(x, method="parametric", nreps=1000) {
-  #
+cwtBoot <- function(x, method = "parametric", nreps = 1000) {
   r <- x$PointEstimates[1,1]
   n <- x$InputData$n
   N <- x$InputData$N
@@ -147,6 +147,7 @@ cwtBoot <- function(x, method="parametric", nreps=1000) {
 #'
 #' @description CWT helper function
 #' @param x default cwt input
+#' @export
 
 cwt <- function(x) UseMethod("cwt")
 

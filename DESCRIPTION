@@ -2,8 +2,8 @@ Package: cwtr
 Type: Package
 Title: CWT Helper Functions
 Version: 0.1.11
-Author: Randy Peterson
-Maintainer: The package maintainer <randy.peterson@alaska.gov>
+Author: Randy Peterson <randy.peterson@alaska.gov>
+Maintainer: Justin Priest <justin.priest@alaska.gov>
 Description: The premier package for calculating CWT estimates.  
     CWT calculations of a single cohort can be found using this package.  
 License: MIT + file LICENSE
