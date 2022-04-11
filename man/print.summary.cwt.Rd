@@ -4,15 +4,17 @@
 \alias{print.summary.cwt}
 \title{Print CWT summary}
 \usage{
-\method{print}{summary.cwt}(x, digits = 3)
+\method{print}{summary.cwt}(x, digits = 3, quiet = FALSE, ...)
 }
 \arguments{
 \item{x}{Default cwt input}
 
 \item{digits}{Number of digits to display, default=3}
+
+\item{quiet}{Silence verbose notes, default = FALSE}
 }
 \description{
-Display a summary of the
+Display a summary of the CWT estimates
 }
 \examples{
 print.summary.cwt()

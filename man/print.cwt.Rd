@@ -4,15 +4,17 @@
 \alias{print.cwt}
 \title{Print the CWT Confidence Interval Summary}
 \usage{
-\method{print}{cwt}(x, digits = 3)
+\method{print}{cwt}(x, digits = 3, quiet = FALSE)
 }
 \arguments{
 \item{x}{Default cwt input}
 
 \item{digits}{Number of digits to display, default=3}
+
+\item{quiet}{Silence verbose notes, default = FALSE}
 }
 \description{
-Create a bootstrap confidence interval
+Print cWT output
 }
 \examples{
 print.cwt()

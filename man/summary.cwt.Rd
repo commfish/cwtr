@@ -4,12 +4,14 @@
 \alias{summary.cwt}
 \title{CWT summary}
 \usage{
-\method{summary}{cwt}(x, alpha = 0.1)
+\method{summary}{cwt}(x, alpha = 0.1, quiet = FALSE, ...)
 }
 \arguments{
 \item{x}{default cwt input}
 
 \item{alpha}{Alpha level for confidence, default=0.1}
+
+\item{quiet}{Silence verbose notes, default = FALSE}
 }
 \description{
 Display a summary of the

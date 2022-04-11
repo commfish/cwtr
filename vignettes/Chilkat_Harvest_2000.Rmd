@@ -8,6 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+# Initially created using usethis::use_vignette("Chilkat_Harvest_2000")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"

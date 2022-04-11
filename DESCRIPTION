@@ -1,7 +1,7 @@
 Package: cwtr
 Type: Package
 Title: CWT Helper Functions
-Version: 0.1.11
+Version: 0.1.5
 Author: Randy Peterson <randy.peterson@alaska.gov>
 Maintainer: Justin Priest <justin.priest@alaska.gov>
 Description: The premier package for calculating CWT estimates.  

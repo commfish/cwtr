@@ -158,20 +158,29 @@ cwt <- function(x) UseMethod("cwt")
 
 #' @title Print the CWT Confidence Interval Summary
 #'
-#' @description Create a bootstrap confidence interval
+#' @description Print cWT output
 #' @param x Default cwt input
 #' @param digits Number of digits to display, default=3
+#' @param quiet Silence verbose notes, default = FALSE
 
 #' @keywords cwt
 #' @export
 #' @examples
 #' print.cwt()
 
-print.cwt <- function(x, digits = 3) {
-  cat("Point Estimates:\n")
-  print(round(x$PointEstimates,digits))
-  cat("\nNOTE:\nr(hat) is the # of fish caught\nt(hat) is the # of tagged fish caught\nq(hat) is the % of fish caught\n")
-  if(inherits(x, "cwtBoot")) {
+print.cwt <- function(x, digits = 3, quiet = FALSE) {
+  if(quiet == TRUE){
+    cat("Point Estimates:\n")
+    print(round(x$PointEstimates,digits))
+    
+  } else{
+    cat("Point Estimates:\n")
+    print(round(x$PointEstimates,digits))
+    cat("\nNOTE:\nr(hat) is the # of fish caught\nt(hat) is the # of tagged fish caught\nq(hat) is the % of fish caught\n")
+    
+  }
+  
+    if(inherits(x, "cwtBoot")) {
     cat("\nBootstrap Estimates:\n")
     y <- x$Bootstrap[1:3]
     outBoot <- cbind(lapply(y, mean),
@@ -190,13 +199,13 @@ print.cwt <- function(x, digits = 3) {
 #' @description Display a summary of the
 #' @param x default cwt input
 #' @param alpha Alpha level for confidence, default=0.1
-
+#' @param quiet Silence verbose notes, default = FALSE
 #' @keywords cwt
 #' @export
 #' @examples
 #' summary.cwt()
 
-summary.cwt <- function(x, alpha = 0.1) {
+summary.cwt <- function(x, alpha = 0.1, quiet = FALSE, ...) {
   out <- unclass(x)
   outPoint <- out$PointEstimates
   outPoint$SE <- sqrt(outPoint$Variance)
@@ -227,25 +236,28 @@ summary.cwt <- function(x, alpha = 0.1) {
 
 #' @title Print CWT summary
 #'
-#' @description Display a summary of the
+#' @description Display a summary of the CWT estimates
 #' @param x Default cwt input
 #' @param digits Number of digits to display, default=3
-
+#' @param quiet Silence verbose notes, default = FALSE
 #' @keywords cwt
 #' @export
 #' @examples
 #' print.summary.cwt()
 
-print.summary.cwt <- function(x, digits = 3) {
+print.summary.cwt <- function(x, digits = 3, quiet = FALSE, ...) {
   cat("Point Estimates Summary:\n")
   print(round(x$SummaryPoint,digits))
   if(inherits(x, "summary.cwtBoot")) {
     cat("\nBootstrap Estimates Summary:\n")
     print(x$SummaryBoot)
   }
-  cat("\nNOTE:\nr is the # of fish caught\nt is the # of tagged fish caught\nq is the % of fish caught\n")
+  if(quiet == TRUE){
+    cat("")
+  } else{
+    cat("\nNOTE:\nr is the # of fish caught\nt is the # of tagged fish caught\nq is the % of fish caught\n")
+  }
 }
-
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: "CWTexample_Geiger1990"
+title: "CWT Example: Geiger 1990"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{CWTexample_Geiger1990}
@@ -14,32 +14,78 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(cwtr)
+varbinom <- function(p, n) { return( p*(1-p)/(n-1)) }
+```
+## Parameter Explanation  
+To estimate the contribution of tagged fish to a specific harvest, we first must 
+know several numbers pertaining to the initial mark application, 
+the fishery of interest, and results of the tag recovery process. These values 
+include:  
+- **_N_**: the number of fish harvested,  
+- **_n_**: the number of fish inspected for marks,  
+- **_m_**: the number of marked fish in the sample,  
+- **_theta_**: the proportion of fish marked during the first marking event 
+( __theta__), ranging from 0-1,  
+- **_lambda_**:  the tag recovery numbers making up a vector of length four. These
+values are 1) the number of heads with CWT shipped to the taglab, *A1* or *a*, 
+2) the number of heads received by the taglab, *A2* or *a'*, 
+3) the number of tags detected at the taglab, *M1*, and 
+4) the number of tags successfully decoded, *M2*.  
+
+
+## Calculating Point Estimates
+For the first code demonstration, we replicate the first example from Geiger 
+(1990). In a fishery of interest, 50% of the run was externally marked and 
+applied a coded wire tag. During the fishery, 1000 fish were harvested; 
+of these, 200 were randomly selected to be inspected for marks. 
+This sample revealed 10 marks. Of these marks, 1 head was sent to the tag lab 
+and received, where the tag was detected and successfully decoded.  
+
+Inputting these parameters into the function `cwtEst()` allows for a simple
+calculation of the point estimate:  
+
+```{r geigerex1}
+x <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=10, theta=c(0.5,NA))
+x 
 ```
 
 
-
-```{r geigerex1, fig.height = 4, fig.width = 6 }
-#Point Estimates for Geiger's first example
-x <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=10, theta=c(0.5,NA))
-#Use the print method to compare results
-x
-#Summary statistics from the equations
+In addition, we are also interested in the summary statistics of the point
+estimate, potentially at varying alpha levels:  
+```{r geigerex2 }
 summary(x, alpha=0.2)
-#Calculate the simulated distribution
-xBoot <- cwtBoot(x, method="geiger", nreps=10000)
-#Use the print method to see results
-xBoot
+```
+
+
+## Calculating Bootstrap Intervals 
+#Calculate the simulated distribution  
 #Summary statistics from the Bootstrap method
+
+```{r geigerex3 }
+
+xBoot <- cwtBoot(x, method="geiger", nreps=10000)
+xBoot
+
 summary(xBoot, alpha=0.2)
+```
+
+
+```{r geigerex4, fig.height = 4, fig.width = 6}
 #Figure 1
 hist(xBoot$Bootstrap$r.boot, xlim = c(0,200)); abline(v=100, lwd=3, col="red")
+```
 
-#Point Estimates for Geiger's 'P Known' example
-x8  = cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=8 , theta=c(0.5,NA))
-x12 = cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=12, theta=c(0.5,NA))
-x15 = cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=15, theta=c(0.5,NA))
+
+## Example: Geiger's 'P known' example
+For this example, we replicate the calculation of Geiger's 'P known' example, 
+across a variety of tags found in the sample. Consider how the estimates and 
+bootstrap intervals change across each tag recovery level.  
+```{r geigerex5, fig.height = 8, fig.width = 6}
+x8  <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=8 , theta=c(0.5,NA))
+x12 <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=12, theta=c(0.5,NA))
+x15 <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=15, theta=c(0.5,NA))
 #Bootstrap Estimates
 xBoot8  <- cwtBoot(x8 , method="geiger", nreps=10000)
 xBoot12 <- cwtBoot(x12, method="geiger", nreps=10000)
@@ -49,13 +95,24 @@ par(mfrow=c(3,1))
 hist(xBoot8$Bootstrap$r.boot , xlim = c(0,300), main="2a"); abline(v=80,  lwd=3, col="red")
 hist(xBoot12$Bootstrap$r.boot, xlim = c(0,300), main="2b"); abline(v=120, lwd=3, col="red")
 hist(xBoot15$Bootstrap$r.boot, xlim = c(0,300), main="2c"); abline(v=150, lwd=3, col="red")
+```
 
-#
-varbinom <- function(p, n) { return( p*(1-p)/(n-1)) }
+To calculate the SE for this product, we use a simple function `varbinom()` 
+(not included in this package) to calculate the variance, using the formula:  
+$$ \frac{p(1-p)}{(n-1)} $$
+```{r geigerex6}
 sqrt(varbinom(  5/10,  10))
 sqrt(varbinom( 25/50,  50))
 sqrt(varbinom(50/100, 100))
+```
 
+
+## Example: Geiger's 'P is Estimated' Example
+
+As a final example, we calculate contribution estimates for where p has been
+estimated. This is more common in wild populations. 
+
+```{r geigerex7, fig.height = 4, fig.width = 6}
 #Point Estimates for Geiger's 'P is Estimated' example
 x    <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=10, theta=c(0.5,NA))
 x10  <- cwtEst(N=c(1000,NA), n=200, lambda=c(1,1,1,1), m=10, theta=c(0.5,0.167))
@@ -85,21 +142,6 @@ par(mfrow=c(3,1))
 hist(xBoot10$Bootstrap$r.boot , xlim = c(0,300), main="3a"); abline(v=100, lwd=3, col="red")
 hist(xBoot50$Bootstrap$r.boot , xlim = c(0,300), main="3b"); abline(v=100, lwd=3, col="red")
 hist(xBoot100$Bootstrap$r.boot, xlim = c(0,300), main="3c"); abline(v=100, lwd=3, col="red")
-
-
-
-##############
-x <- cwtEst(N=c(124896,NA), n=35159, lambda=c(783,798,633,633), m=6, theta=c(0.018867925,102.145455))
-xBoot <- cwtBoot(x, method="parametric", nreps=10000)
-summary(xBoot)
-plot(xBoot)
-
-
-
-print(xBoot)
-
-
-
 
 ```
 
