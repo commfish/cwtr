@@ -1,5 +1,5 @@
 ---
-title: "Chilkat_Harvest_2000"
+title: "Chilkat Coho Harvest, Year 2000"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Chilkat_Harvest_2000}
@@ -15,62 +15,67 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+
+There are several functions that provide useful calculations of CWT estimates and variances.  
+The core function `cwtEst()` takes parameters from the fishery and sample recovery as arguments. 
+These are: **_N_** (number of fish harvested), 
+**_n_** (number of fish inspected for marks), 
+**_m_** (number of marked fish in the sample), 
+**_theta_** (proportion of marked fish in the sample population), and
+**_lambda_** (a vector of 4 tag recovery numbers).  
+Note that the argument for _N_ and _theta_ can be either a single number 
+(estimate only) or a vector of both the estimate and the variance.  
+
+# Chilkat Coho Example
+The following example uses actual estimates of coho salmon marked in the 
+Chilkat River, with tag recovery occurring during the troll fishery in 
+stat week 28 for the NW Quadrant.  
+
+
+## Calculate Estimate & Summary
+The function `cwtEst()` uses the fishery and tag recovery parameters as 
+arguments. This allows for output of the estimates:  
+```{r example1}
 library(cwtr)
+cwtEst(N=c(33666, NA), n=7618, lambda=c(138, 140, 116, 116), m=1, theta=c(0.01886, 102.15))
 ```
 
+<br>
 
-
-```{r example1, fig.height = 5, fig.width = 6}
-#Point Estimates for Troll, SW 28, NW Quadrant
-x <- cwtEst(N=c(33666,NA), n=7618, lambda=c(138,140,116,116), m=1, theta=c(0.01886,102.15))
-#Use the print method to look at results
-x
-#Use the summary method to obtain SE, CV, and CI
+Next, we can use the summary method to obtain the SE, CV, and CI for our estimate:
+```{r example2}
+x <- cwtEst(N=c(33666, NA), n=7618, lambda=c(138, 140, 116, 116), m=1, theta=c(0.01886, 102.15))
 summary(x)
-#Bootstrap Estimates
+```
+
+<br>
+
+## Bootstrap Intervals
+Because these are data from a non-normal distribution, we know that at small estimates 
+using Gaussian confidence intervals are likely to be incorrect and/or result in 
+negative harvest, tags, etc.  
+For this reason, a bootstrap interval function is provided:  
+```{r example3, fig.height = 5, fig.width = 6}
 xBoot <- cwtBoot(x, method="parametric", nreps=10000)
-#Use the print method again to look at results
 xBoot
-#Use the summary method again to obtain SE, CV, and CI
+
+```
+
+<br>
+
+As with before, we can obtain the summary of the bootstrap intervals:
+```{r example4, fig.height = 5, fig.width = 6}
 summary(xBoot)
-#Use the plot method to obtain plots of the bootstrap simulation
+
+```
+
+<br>
+
+Last, using the `plot()` function on a cwt object can provide plots of the 
+bootstrap simulation.  
+```{r example5, fig.height = 4, fig.width = 6}
 plot(xBoot)
 ```
 
 
-
-```{r example2, fig.height = 4, fig.width = 6}
-#Point Estimates for Troll, SW 30, NW Quadrant
-x <- cwtEst(N=c(124896,NA), n=35159, lambda=c(783,798,633,633), m=6, theta=c(0.018867925,102.145455))
-#Use the print method to look at results
-x
-#Use the summary method to obtain SE, CV, and CI
-summary(x)
-#Bootstrap Estimates
-xBoot <- cwtBoot(x, method="parametric", nreps=10000)
-#Use the print method again to look at results
-xBoot
-#Use the summary method again to obtain SE, CV, and CI
-summary(xBoot)
-#Use the plot method to obtain plots of the bootstrap simulation
-plot(xBoot)
-```
-
-
-```{r example3, fig.height = 4, fig.width = 6 }
-#Point Estimates for Sport, SW 34, NE Quadrant
-x <- cwtEst(N=c(6056,3210960), n=2008, lambda=c(109,112,97,97), m=2, theta=c(0.018867925,102.145455))
-#Use the print method to look at results
-x
-#Use the summary method to obtain SE, CV, and CI
-summary(x)
-#Bootstrap Estimates
-xBoot <- cwtBoot(x, method="parametric", nreps=10000)
-#Use the print method again to look at results
-xBoot
-#Use the summary method again to obtain SE, CV, and CI
-summary(xBoot)
-#Use the plot method to obtain plots of the bootstrap simulation
-plot(xBoot)
-```
+<br>  

@@ -1,11 +1,14 @@
 Package: cwtr
 Type: Package
 Title: CWT Helper Functions
-Version: 0.1.5
-Author: Randy Peterson <randy.peterson@alaska.gov>
+Version: 0.1.51
+Authors@R: c(person("Randy", "Peterson", role = c("aut", "cre"),
+                    email = "randy.peterson@alaska.gov"),
+             person("Justin", "Priest", role = "aut", 
+             email = "justin.priest@alaska.gov"))
 Maintainer: Justin Priest <justin.priest@alaska.gov>
-Description: The premier package for calculating CWT estimates.  
-    CWT calculations of a single cohort can be found using this package.  
+Description: Package 'cwtr' provides functions for calculating CWT estimates and bootstrap intervals.  
+    Simple CWT calculations of a single cohort can be found using the easy-to-use functions.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

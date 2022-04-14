@@ -6,6 +6,15 @@
 \alias{cwtr-package}
 \title{cwtr: CWT Helper Functions}
 \description{
-The premier package for calculating CWT estimates. CWT calculations of a single cohort can be found using this package.
+Package 'cwtr' provides functions for calculating CWT estimates and bootstrap intervals. Simple CWT calculations of a single cohort can be found using the easy-to-use functions.
+}
+\author{
+\strong{Maintainer}: Randy Peterson \email{randy.peterson@alaska.gov}
+
+Authors:
+\itemize{
+  \item Justin Priest \email{justin.priest@alaska.gov}
+}
+
 }
 \keyword{internal}
