@@ -253,7 +253,7 @@ print.summary.cwt <- function(x, digits = 3, quiet = FALSE, ...) {
     print(x$SummaryBoot)
   }
   if(quiet == TRUE){
-    cat("")
+    cat(" ")
   } else{
     cat("\nNOTE:\nr is the # of fish caught\nt is the # of tagged fish caught\nq is the % of fish caught\n")
   }
