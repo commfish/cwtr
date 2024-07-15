@@ -13,6 +13,7 @@ Package 'cwtr' provides functions for calculating CWT estimates and bootstrap in
 
 Authors:
 \itemize{
+  \item Randy Peterson \email{randy.peterson@alaska.gov}
   \item Justin Priest \email{justin.priest@alaska.gov}
 }
 

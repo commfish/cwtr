@@ -13,8 +13,8 @@ variance will default to NA.}
 
 \item{n}{Number of fish sampled in the fishery (inspected for marks)}
 
-\item{lambda}{Vector of length four containing 1) the number of heads with CWT shipped to the taglab, A1,
-2) the number of heads received by the taglab, A2, 3) the number of tags detected at the taglab, M1, and
+\item{lambda}{Vector of length four containing 1) the number of heads with CWT shipped to the taglab, A1;
+2) the number of heads received by the taglab, A2; 3) the number of tags detected at the taglab, M1; and
 4) the number of tags successfully decoded, M2.}
 
 \item{m}{Number of marked fish in the sample}

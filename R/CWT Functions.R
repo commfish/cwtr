@@ -20,8 +20,8 @@
 #' 1) Number of fish harvested in fishery and 2) the associated variance. If entered as a single number, the
 #' variance will default to NA.
 #' @param n Number of fish sampled in the fishery (inspected for marks)
-#' @param lambda Vector of length four containing 1) the number of heads with CWT shipped to the taglab, A1,
-#' 2) the number of heads received by the taglab, A2, 3) the number of tags detected at the taglab, M1, and
+#' @param lambda Vector of length four containing 1) the number of heads with CWT shipped to the taglab, A1;
+#' 2) the number of heads received by the taglab, A2; 3) the number of tags detected at the taglab, M1; and
 #' 4) the number of tags successfully decoded, M2.
 #' @param m Number of marked fish in the sample
 #' @param theta the proportion of stock that is marked, optionally can be a vector of length two
@@ -38,7 +38,7 @@
 #' cwtEst(N=1000, n=200, lambda=c(1,1,1,1), m=10, theta=0.5)
 
 cwtEst <- function(N, n, lambda, m, theta) {
-  lambda2 <- (lambda[1]/lambda[2]) * (lambda[3]/lambda[4])
+  lambda2 <- (lambda[2]/lambda[1]) * (lambda[4]/lambda[3])
   r.est <- (m*N[1])/(n*theta[1]*lambda2)
   t.est <- (m*N[1])/(n*lambda2)
   q.est <- r.est/N[1]
@@ -88,7 +88,7 @@ cwtBoot <- function(x, method = "parametric", nreps = 1000) {
   ncwt <- x$InputData$m
   theta  <- x$InputData$theta
   lambda <- x$InputData$lambda
-  lambda2 = (lambda[1]/lambda[2]) * (lambda[3]/lambda[4])
+  lambda2 = (lambda[2]/lambda[1]) * (lambda[4]/lambda[3])
   #
   if(method=="geiger") {
     #P known
@@ -127,8 +127,8 @@ cwtBoot <- function(x, method = "parametric", nreps = 1000) {
       t.boot[i] <- rbinom(1, round(r,0), 1/theta.boot[i]) #M_b in Geiger
       m.boot[i] <- rhyper(1, t.boot[i], N.boot[i], n) #x_b in Geiger
     }
-    aa.boot <- rbinom(nreps, lambda[2], lambda[1]/lambda[2])/lambda[2]
-    tt.boot <- rbinom(nreps, lambda[4], lambda[3]/lambda[4])/lambda[4]
+    aa.boot <- rbinom(nreps, lambda[1], lambda[2]/lambda[1])/lambda[1]
+    tt.boot <- rbinom(nreps, lambda[3], lambda[4]/lambda[3])/lambda[3]
     lambda.boot = (1/aa.boot) * (1/tt.boot)
     r.boot <- m.boot*theta.boot*(N.boot/n)*lambda.boot
     q.boot <- r.boot / N.boot
