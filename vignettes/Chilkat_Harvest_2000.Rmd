@@ -37,14 +37,14 @@ The function `cwtEst()` uses the fishery and tag recovery parameters as
 arguments. This allows for output of the estimates:  
 ```{r example1}
 library(cwtr)
-cwtEst(N=c(33666, NA), n=7618, lambda=c(138, 140, 116, 116), m=1, theta=c(0.01886, 102.15))
+cwtEst(N=c(33666, NA), n=7618, lambda=c(140, 138, 116, 116), m=1, theta=c(0.01886, 102.15))
 ```
 
 <br>
 
 Next, we can use the summary method to obtain the SE, CV, and CI for our estimate:
 ```{r example2}
-x <- cwtEst(N=c(33666, NA), n=7618, lambda=c(138, 140, 116, 116), m=1, theta=c(0.01886, 102.15))
+x <- cwtEst(N=c(33666, NA), n=7618, lambda=c(140, 138, 116, 116), m=1, theta=c(0.01886, 102.15))
 summary(x)
 ```
 
