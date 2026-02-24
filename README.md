@@ -22,7 +22,7 @@ You can install the development version of cwtr from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("justinpriest/cwtr", build_vignettes = TRUE)
+remotes::install_github("commfish/cwtr", build_vignettes = TRUE)
 ```
 
 <br>
